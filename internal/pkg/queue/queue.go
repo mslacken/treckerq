@@ -4,7 +4,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"os"
-	"strconv"
+	"reflect"
 
 	"github.com/mslacken/treckerq/internal/pkg/tlog"
 )
@@ -31,55 +31,14 @@ func OpenQueueFile(fileName string) (TreckerQueue, error) {
 			queue.format = line[0]
 			queue.exec = line[1]
 		} else if len(line) >= 2 {
-			switch line[0] {
-			case "cnt":
-				queue.cnt, err = strconv.Atoi(line[1])
-				if err != nil {
-					tlog.Warn("cnt has wrong format %s\n", line[1])
-				}
-			case "twk":
-				queue.twk, err = strconv.Atoi(line[1])
-				if err != nil {
-					tlog.Warn("twk has wrong format %s\n", line[1])
-				}
-			case "tfl":
-				queue.tfl, err = strconv.Atoi(line[1])
-				if err != nil {
-					tlog.Warn("tfl has wrong format %s\n", line[1])
-				}
-			case "tsk":
-				queue.tsk, err = strconv.Atoi(line[1])
-				if err != nil {
-					tlog.Warn("tsk has wrong format %s\n", line[1])
-				}
-			case "nwk":
-				queue.nwk, err = strconv.Atoi(line[1])
-				if err != nil {
-					tlog.Warn("nwk has wrong format %s\n", line[1])
-				}
-			case "mxt":
-				queue.mxt, err = strconv.Atoi(line[1])
-				if err != nil {
-					tlog.Warn("mxt has wrong format %s\n", line[1])
-				}
-			case "mnt":
-				queue.mnt, err = strconv.Atoi(line[1])
-				if err != nil {
-					tlog.Warn("mnt has wrong format %s\n", line[1])
-				}
-			case "smc":
-				queue.smc, err = strconv.Atoi(line[1])
-				if err != nil {
-					tlog.Warn("smc has wrong format %s\n", line[1])
-				}
-			case "nxt":
-				queue.nxt, err = strconv.Atoi(line[1])
-				if err != nil {
-					tlog.Warn("nxt has wrong format %s\n", line[1])
-				}
-			case "Q":
-			}
+			dType := reflect.TypeOf(queue)
+			dhVal := reflect.ValueOf(queue)
+			for j := 0; j < dType.Elem().NumField(); j++ {
+				field := dType.Elem().Field(j)
+				key := field.Tag.Get("mapper")
 
+				kind := field.Type.Kind()
+			}
 		} else {
 			tlog.Warn("Found garbage in queue %s:%u %s\n", fileName, i, line)
 		}
