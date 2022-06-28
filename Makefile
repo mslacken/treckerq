@@ -10,3 +10,6 @@ vendor:
 	go mod tidy -v    
 	go mod vendor
 
+all: trecker
+
+.PHONY: all

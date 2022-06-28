@@ -1,6 +1,7 @@
 package trecker
 
 import (
+	"github.com/mslacken/treckerq/internal/app/trecker/list"
 	"github.com/mslacken/treckerq/internal/pkg/help"
 	"github.com/mslacken/treckerq/internal/pkg/tlog"
 	"github.com/spf13/cobra"
@@ -11,7 +12,7 @@ import (
 var (
 	rootCmd = &cobra.Command{
 		DisableFlagsInUseLine: true,
-		Use:                   "trecker COMMAND [OPTIONS] list",
+		Use:                   "trecker COMMAND [OPTIONS] LISTFILE",
 		Short:                 "Executes command given in list file",
 		Long:                  `Control for the trecker command`,
 		PersistentPreRunE:     rootPersistentPreRunE,
@@ -40,6 +41,7 @@ func init() {
 	rootCmd.SetUsageTemplate(help.UsageTemplate)
 	rootCmd.SetHelpTemplate(help.HelpTemplate)
 
+	rootCmd.AddCommand(list.GetCommand())
 }
 func rootPersistentPreRunE(cmd *cobra.Command, args []string) error {
 	if DebugFlag {
