@@ -1,5 +1,6 @@
 # project data
 /vendor
+/.vscode
 
 # generated files
 /trecker
