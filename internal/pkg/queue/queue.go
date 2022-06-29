@@ -13,6 +13,9 @@ import (
 	"github.com/mslacken/treckerq/internal/pkg/tlog"
 )
 
+/*
+Read in a queue file and return a queue object.
+*/
 func OpenQueueFile(fileName string) (TreckerQueue, error) {
 	var queue TreckerQueue
 	f, err := os.Open(fileName)

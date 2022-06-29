@@ -1,7 +1,7 @@
 package trecker
 
 import (
-	"github.com/mslacken/treckerq/internal/app/trecker/list"
+	"github.com/mslacken/treckerq/internal/app/trecker/count"
 	"github.com/mslacken/treckerq/internal/pkg/help"
 	"github.com/mslacken/treckerq/internal/pkg/tlog"
 	"github.com/spf13/cobra"
@@ -41,7 +41,7 @@ func init() {
 	rootCmd.SetUsageTemplate(help.UsageTemplate)
 	rootCmd.SetHelpTemplate(help.HelpTemplate)
 
-	rootCmd.AddCommand(list.GetCommand())
+	rootCmd.AddCommand(count.GetCommand())
 }
 func rootPersistentPreRunE(cmd *cobra.Command, args []string) error {
 	if DebugFlag {

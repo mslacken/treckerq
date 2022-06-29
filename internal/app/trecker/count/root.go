@@ -1,4 +1,4 @@
-package list
+package count
 
 import (
 	"github.com/spf13/cobra"
@@ -6,16 +6,17 @@ import (
 
 var (
 	baseCmd = &cobra.Command{
-		Use:   "list LISTFILE",
-		Short: "list all jobs in file",
+		Use:   "count LISTFILE",
+		Short: "print information about the queue",
 		Long:  `List all jobs in the queue file`,
 		RunE:  CobraRunE,
 		Args:  cobra.MinimumNArgs(1),
 	}
-	listFile string
+	QueuedTasks bool
 )
 
 func init() {
+	baseCmd.PersistentFlags().BoolVar(&QueuedTasks, "Q", false, "print number of tasks left in queue")
 }
 
 // GetRootCommand returns the root cobra.Command for the application.

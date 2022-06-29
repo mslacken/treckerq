@@ -1,4 +1,4 @@
-package list
+package count
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 )
 
 func CobraRunE(cmd *cobra.Command, args []string) error {
-	tlog.Debug("Called list")
+	tlog.Debug("Called count")
 	queue, err := queue.OpenQueueFile(args[0])
 	if err != nil {
 		fmt.Println(err)
