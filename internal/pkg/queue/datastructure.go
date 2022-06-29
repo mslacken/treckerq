@@ -17,6 +17,7 @@ type TreckerQueue struct {
 	Smt    int `comment:"Sum of all execution times in seconds" key:"smt"`
 	Nxt    int `comment:"Whole-file byte offset of next entry to work on" key:"nxt"`
 	Tasks  []Task
+	Events []Log
 }
 
 type Task struct {
